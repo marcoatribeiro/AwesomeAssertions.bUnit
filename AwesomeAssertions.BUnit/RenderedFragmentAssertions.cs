@@ -150,7 +150,11 @@ public class RenderedFragmentAssertions<TAssertions, TComponent>(IRenderedCompon
     public AndConstraint<TAssertions> NotHaveClass(string expected, string because = "", params object[] becauseArgs)
     {
         var element = Subject.AsElement();
-        element.ClassList.Should().NotContain(expected, because, becauseArgs);
+        CurrentAssertionChain
+            .BecauseOf(because, becauseArgs)
+            .WithDefaultIdentifier("element.ClassList")
+            .ForCondition(!element.ClassList.Contains(expected))
+            .FailWith("Expected {context} {0} to not contain {1}{reason}.", element.ClassList, expected);
         
         return new AndConstraint<TAssertions>((TAssertions)this);
     }
@@ -158,7 +162,11 @@ public class RenderedFragmentAssertions<TAssertions, TComponent>(IRenderedCompon
     public AndConstraint<TAssertions> HaveClass(string expected, string because = "", params object[] becauseArgs)
     {
         var element = Subject.AsElement();
-        element.ClassList.Should().Contain(expected, because, becauseArgs);
+        CurrentAssertionChain
+            .BecauseOf(because, becauseArgs)
+            .WithDefaultIdentifier("element.ClassList")
+            .ForCondition(element.ClassList.Contains(expected))
+            .FailWith("Expected {context} {0} to contain {1}{reason}.", element.ClassList, expected);
         
         return new AndConstraint<TAssertions>((TAssertions)this);
     }

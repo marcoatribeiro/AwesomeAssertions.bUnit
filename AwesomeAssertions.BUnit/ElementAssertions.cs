@@ -145,14 +145,22 @@ public class ElementAssertions<TAssertions>(IElement value) : ReferenceTypeAsser
     
     public AndConstraint<TAssertions> NotHaveClass(string expected, string because = "", params object[] becauseArgs)
     {
-        Subject.ClassList.Should().NotContain(expected, because, becauseArgs);
+        CurrentAssertionChain
+            .BecauseOf(because, becauseArgs)
+            .WithDefaultIdentifier("Subject.ClassList")
+            .ForCondition(!Subject.ClassList.Contains(expected))
+            .FailWith("Expected {context} {0} to not contain {1}{reason}.", Subject.ClassList, expected);
         
         return new AndConstraint<TAssertions>((TAssertions)this);
     }
     
     public AndConstraint<TAssertions> HaveClass(string expected, string because = "", params object[] becauseArgs)
     {
-        Subject.ClassList.Should().Contain(expected, because, becauseArgs);
+        CurrentAssertionChain
+            .BecauseOf(because, becauseArgs)
+            .WithDefaultIdentifier("Subject.ClassList")
+            .ForCondition(Subject.ClassList.Contains(expected))
+            .FailWith("Expected {context} {0} to contain {1}{reason}.", Subject.ClassList, expected);
         
         return new AndConstraint<TAssertions>((TAssertions)this);
     }
