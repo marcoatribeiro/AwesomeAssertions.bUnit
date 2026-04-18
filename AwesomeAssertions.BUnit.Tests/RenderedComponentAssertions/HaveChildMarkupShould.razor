@@ -1,0 +1,127 @@
+@using Xunit.Sdk
+@inherits Bunit.BunitContext
+
+@code {
+
+    [Fact]
+    public void Succeed_WhenMatchingByString()
+    {
+        Render(@<button><h1>Test</h1></button>)
+            .Should().HaveChildMarkup("<h1>Test</h1>");
+    }
+
+    [Fact]
+    public void Succeed_WhenMatchingByRenderFragment()
+    {
+        Render(@<button><h1>Test</h1></button>)
+            .Should().HaveChildMarkup(@<h1>Test</h1>);
+    }
+
+    [Fact]
+    public void ReturnAndConstraint_WhenMatchingByString()
+    {
+        var andConstraint = Render(@<button><h1>Test</h1></button>)
+            .Should().HaveChildMarkup("<h1>Test</h1>");
+
+        var constraintType = andConstraint.GetType();
+        constraintType.IsGenericType.Should().BeTrue();
+        constraintType.GetGenericTypeDefinition().Should().Be(typeof(AndConstraint<>));
+        var assertionType = constraintType.GetGenericArguments()[0];
+        assertionType.IsGenericType.Should().BeTrue();
+        assertionType.GetGenericTypeDefinition().Should().Be(typeof(RenderedFragmentAssertions<>));
+    }
+
+    [Fact]
+    public void ReturnAndConstraint_WhenMatchingByRenderFragment()
+    {
+        var andConstraint = Render(@<button><h1>Test</h1></button>)
+            .Should().HaveChildMarkup(@<h1>Test</h1>);
+
+        var constraintType = andConstraint.GetType();
+        constraintType.IsGenericType.Should().BeTrue();
+        constraintType.GetGenericTypeDefinition().Should().Be(typeof(AndConstraint<>));
+        var assertionType = constraintType.GetGenericArguments()[0];
+        assertionType.IsGenericType.Should().BeTrue();
+        assertionType.GetGenericTypeDefinition().Should().Be(typeof(RenderedFragmentAssertions<>));
+    }
+
+    [Fact]
+    public void ThrowException_WhenChildMarkupIsNull_AndMatchingByString()
+    {
+        Action aut = () => Render(@<button></button>)
+            .Should().HaveChildMarkup("<h1>Test</h1>"); ;
+
+        aut.Should().Throw<XunitException>()
+            .And.Message.Should().Be("Expected IRenderedComponent to have child \"<h1>Test</h1>\", but found <null>.");
+    }
+
+    [Fact]
+    public void ThrowException_WhenChildMarkupIsNull_AndMatchingByRenderFragment()
+    {
+        Action aut = () => Render(@<button></button>)
+            .Should().HaveChildMarkup(@<h1>Test</h1>);
+
+        aut.Should().Throw<XunitException>()
+            .And.Message.Should().Be("Expected IRenderedComponent to have child \"<h1>Test</h1>\", but found <null>.");
+    }
+
+    [Fact]
+    public void ThrowException_AndIncludeBecauseMessage_WhenChildMarkupIsNull_AndMatchingByString()
+    {
+        Action aut = () => Render(@<button></button>)
+            .Should().HaveChildMarkup("<h1>Test</h1>", "this is very important to {0}", "Steve"); ;
+
+        aut.Should().Throw<XunitException>()
+            .And.Message.Should().Be("Expected IRenderedComponent to have child \"<h1>Test</h1>\" because this is very important to Steve, but found <null>.");
+    }
+
+    [Fact]
+    public void ThrowException_AndIncludeBecauseMessage_WhenChildMarkupIsNull_AndMatchingByRenderFragment()
+    {
+        Action aut = () => Render(@<button></button>)
+            .Should().HaveChildMarkup(@<h1>Test</h1>, "this is very important to {0}", "Steve");
+
+        aut.Should().Throw<XunitException>()
+            .And.Message.Should().Be("Expected IRenderedComponent to have child \"<h1>Test</h1>\" because this is very important to Steve, but found <null>.");
+    }
+
+    [Fact]
+    public void ThrowException_WhenChildMarkupDoesNotMatch_AndMatchingByString()
+    {
+        Action aut = () => Render(@<button><h2>Test</h2></button>)
+            .Should().HaveChildMarkup("<h1>Test</h1>"); ;
+
+        aut.Should().Throw<XunitException>()
+            .And.Message.Should().Be("Expected IRenderedComponent to have child \"<h1>Test</h1>\", but found \"<h2>Test</h2>\".");
+    }
+
+    [Fact]
+    public void ThrowException_WhenChildMarkupDoesNotMatch_AndMatchingByRenderFragment()
+    {
+        Action aut = () => Render(@<button><h2>Test</h2></button>)
+            .Should().HaveChildMarkup(@<h1>Test</h1>);
+
+        aut.Should().Throw<XunitException>()
+            .And.Message.Should().Be("Expected IRenderedComponent to have child \"<h1>Test</h1>\", but found \"<h2>Test</h2>\".");
+    }
+
+    [Fact]
+    public void ThrowException_AndIncludeBecauseMessage_WhenChildMarkupDoesNotMatch_AndMatchingByString()
+    {
+        Action aut = () => Render(@<button><h2>Test</h2></button>)
+            .Should().HaveChildMarkup("<h1>Test</h1>", "this is very important to {0}", "Steve"); ;
+
+        aut.Should().Throw<XunitException>()
+            .And.Message.Should().Be("Expected IRenderedComponent to have child \"<h1>Test</h1>\" because this is very important to Steve, but found \"<h2>Test</h2>\".");
+    }
+
+    [Fact]
+    public void ThrowException_AndIncludeBecauseMessage_WhenChildMarkupDoesNotMatch_AndMatchingByRenderFragment()
+    {
+        Action aut = () => Render(@<button><h2>Test</h2></button>)
+            .Should().HaveChildMarkup(@<h1>Test</h1>, "this is very important to {0}", "Steve");
+
+        aut.Should().Throw<XunitException>()
+            .And.Message.Should().Be("Expected IRenderedComponent to have child \"<h1>Test</h1>\" because this is very important to Steve, but found \"<h2>Test</h2>\".");
+    }
+}

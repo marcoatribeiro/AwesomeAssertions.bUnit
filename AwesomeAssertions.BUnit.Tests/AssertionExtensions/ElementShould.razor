@@ -1,0 +1,15 @@
+@inherits Bunit.BunitContext
+
+@code {
+    
+    [Fact]
+    public void ReturnRenderFragmentAssertion()
+    {
+        var element = Render(@<img src="/logo.png" alt="Logo">)
+            .AsElement();
+            
+        var elementAssertions = element.Should();
+        
+        elementAssertions.GetType().Should().Be(typeof(ElementAssertions));
+    }
+}

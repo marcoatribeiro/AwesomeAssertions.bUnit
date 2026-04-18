@@ -1,0 +1,25 @@
+@using Xunit.Sdk
+@inherits Bunit.BunitContext
+
+@code {
+
+    [Fact]
+    public void SucceedWhenOfType()
+    {
+        Render(@<img src="/logo.png" alt="Logo">)
+            .AsElement()
+            .Should().NotBeOfType<IRenderedComponent<Microsoft.AspNetCore.Components.IComponent>>();
+    }
+
+    [Fact]
+    public void ThrowExceptionWhenNotOfType()
+    {
+        Action aut = () =>
+        {
+            var element = Render(@<img src="/logo.png" alt="Logo">).AsElement();
+            element.Should().NotBeOfType(element.GetType());
+        };
+
+        aut.Should().Throw<XunitException>();
+    }
+}
