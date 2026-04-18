@@ -4,14 +4,20 @@
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
 
-        <PackageTags>Blazor;BUnit;AwesomeAssertions</PackageTags>
-        <Version>0.0.0</Version>
-        <Summary>Test Blazor Components with AwesomeAssertions</Summary>
         <Description>Extension methods that provide awesome assertions on top of BUnit.</Description>
-        <PackageProjectUrl>https://github.com/user/AwesomeAssertions.bUnit</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/user/AwesomeAssertions.bUnit/blob/main/LICENSE</PackageLicenseUrl>
+		<AssemblyTitle>AwesomeAssertions - BUnit</AssemblyTitle>
+		<Authors>Marco Ribeiro</Authors>
+		<Company />
+		<PackageId>AwesomeAssertions.BUnit</PackageId>
+		<PackageVersion>0.1.0</PackageVersion>
+		<Version>0.1.0</Version>
+        <PackageTags>Blazor;BUnit;AwesomeAssertions</PackageTags>
+		<PackageLicenseExpression>MIT OR Apache-2.0</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/marcoatribeiro/AwesomeAssertions.bUnit</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/marcoatribeiro/AwesomeAssertions.bUnit/blob/main/LICENSE</PackageLicenseUrl>
         <RepositoryType>git</RepositoryType>
-        <RepositoryUrl>https://github.com/user/AwesomeAssertions.bUnit</RepositoryUrl>
+        <RepositoryUrl>https://github.com/marcoatribeiro/AwesomeAssertions.bUnit</RepositoryUrl>
+        <Summary>Test Blazor Components with AwesomeAssertions</Summary>
     </PropertyGroup>
 
     <ItemGroup>
