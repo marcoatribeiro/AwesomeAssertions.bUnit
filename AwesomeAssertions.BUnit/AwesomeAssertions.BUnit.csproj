@@ -14,7 +14,6 @@
         <PackageTags>Blazor;BUnit;AwesomeAssertions</PackageTags>
 		<PackageLicenseExpression>MIT OR Apache-2.0</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/marcoatribeiro/AwesomeAssertions.bUnit</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/marcoatribeiro/AwesomeAssertions.bUnit/blob/main/LICENSE</PackageLicenseUrl>
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/marcoatribeiro/AwesomeAssertions.bUnit</RepositoryUrl>
         <Summary>Test Blazor Components with AwesomeAssertions</Summary>
