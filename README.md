@@ -1,5 +1,5 @@
-[![.NET](https://github.com/user/AwesomeAssertions.bUnit/actions/workflows/publish.yml/badge.svg)](https://github.com/user/AwesomeAssertions.bUnit/actions/workflows/publish.yml)
 [![MIT License](https://img.shields.io/github/license/dotnet/aspnetcore?color=%230b0&style=flat-square)](https://github.com/user/AwesomeAssertions.bUnit/blob/main/LICENSE)
+[![Nuget](https://img.shields.io/nuget/v/TorinoInfo.AwesomeAssertions.BUnit)](https://www.nuget.org/packages/TorinoInfo.AwesomeAssertions.BUnit)
 
 # AwesomeAssertions.bUnit
 
